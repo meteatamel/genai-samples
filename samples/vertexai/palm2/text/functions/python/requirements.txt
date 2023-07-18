@@ -1,0 +1,2 @@
+functions-framework==3.2.1
+google-cloud-aiplatform==1.28.0

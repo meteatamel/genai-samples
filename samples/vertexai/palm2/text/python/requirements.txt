@@ -1,1 +1,0 @@
-google-cloud-aiplatform[pipelines]==1.26.0

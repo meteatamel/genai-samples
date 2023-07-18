@@ -1,5 +1,5 @@
+# GENERATED FILE - DO NOT EDIT (source lives in common folder)
 #!/bin/bash
-
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source config.sh
+source $(dirname $0)/config.sh
 
-echo "Enable required services"
-gcloud services enable  \
-  aiplatform.googleapis.com
-
-echo "Auth login (needed for curl samples)"
-gcloud auth login
-
-echo "Application default login (needed for Python SDK samples)"
-gcloud auth application-default login
+gcloud functions call $SERVICE_NAME \
+  --gen2 \
+  --region $REGION
