@@ -14,5 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export PROJECT_ID=$(gcloud config get-value project)
-export LOCATION=us-central1 # This is the only choice currently
+source config.sh
+
+echo "Enable required services"
+gcloud services enable  \
+  aiplatform.googleapis.com
+
+echo "Auth login (needed for curl samples)"
+gcloud auth login
+
+echo "Application default login (needed for Python SDK samples)"
+gcloud auth application-default login

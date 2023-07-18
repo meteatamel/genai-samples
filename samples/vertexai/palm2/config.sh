@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source config.sh
-
-echo "Enable required services"
-gcloud services enable  \
-  aiplatform.googleapis.com
+# Used by curl examples
+export PROJECT_ID=$(gcloud config get-value project)
+export LOCATION=us-central1 # This is the only choice currently
