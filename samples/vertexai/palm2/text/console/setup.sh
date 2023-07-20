@@ -23,5 +23,5 @@ gcloud services enable \
 echo "Auth login (needed for curl samples)"
 gcloud auth login
 
-echo "Application default login (needed for Python SDK samples)"
+echo "Application default login (needed for Python SDK, C#, etc. samples)"
 gcloud auth application-default login

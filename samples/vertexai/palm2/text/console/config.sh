@@ -14,6 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Used by curl examples
-export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_ID=genai-atamel # Change to your project
 export LOCATION=us-central1 # This is the only choice currently

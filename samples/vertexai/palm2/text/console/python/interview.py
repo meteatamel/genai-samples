@@ -1,7 +1,15 @@
+import os
+import vertexai
 from vertexai.preview.language_models import TextGenerationModel
 
 def interview(temperature: float = .2) -> None:
-    """Ideation example with a Large Language Model"""
+
+    # Set them with 'source ../config.sh'
+    project = os.environ['PROJECT_ID']
+    location = os.environ['LOCATION']
+
+    # This is needed if you don't want to rely on `gcloud auth login`
+    vertexai.init(project=project, location=location)
 
     parameters = {
         "temperature": temperature,

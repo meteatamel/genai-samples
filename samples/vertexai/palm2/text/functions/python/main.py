@@ -15,7 +15,6 @@ import functions_framework
 from vertexai.preview.language_models import TextGenerationModel
 
 def interview(temperature: float = .2) -> str:
-    """Ideation example with a Large Language Model"""
 
     parameters = {
         "temperature": temperature,
