@@ -15,4 +15,4 @@
 # limitations under the License.
 
 export PROJECT_ID=genai-atamel # Change to your project
-export LOCATION=us-central1 # This is the only choice currently
+export REGION=us-central1 # This is the only choice currently

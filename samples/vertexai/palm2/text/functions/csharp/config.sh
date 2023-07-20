@@ -14,21 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ../config.sh
+export PROJECT_ID=genai-atamel # Change to your project
+export REGION=us-central1
 
-curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/publishers/google/models/text-bison:predict -d \
-  $'{
-    "instances": [
-      { "prompt": "Give me ten interview questions for the role of program manager."}
-    ],
-    "parameters": {
-      "temperature": 0.2,
-      "maxOutputTokens": 256,
-      "topK": 40,
-      "topP": 0.95
-    }
-  }'
+export FUNCTION_NAME=vertexai-palm2-text
+export SERVICE_TYPE=function
+export RUNTIME=dotnet6
+export SERVICE_NAME=$FUNCTION_NAME-$SERVICE_TYPE-$RUNTIME

@@ -1,5 +1,5 @@
+# GENERATED FILE - DO NOT EDIT (source lives in common folder)
 #!/bin/bash
-
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,21 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ../config.sh
+source $(dirname $0)/config.sh
 
-curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/publishers/google/models/text-bison:predict -d \
-  $'{
-    "instances": [
-      { "prompt": "Give me ten interview questions for the role of program manager."}
-    ],
-    "parameters": {
-      "temperature": 0.2,
-      "maxOutputTokens": 256,
-      "topK": 40,
-      "topP": 0.95
-    }
-  }'
+gcloud functions call $SERVICE_NAME \
+  --gen2 \
+  --region $REGION

@@ -6,10 +6,10 @@ def interview(temperature: float = .2) -> None:
 
     # Set them with 'source ../config.sh'
     project = os.environ['PROJECT_ID']
-    location = os.environ['LOCATION']
+    region = os.environ['REGION']
 
     # This is needed if you don't want to rely on `gcloud auth login`
-    vertexai.init(project=project, location=location)
+    vertexai.init(project=project, location=region)
 
     parameters = {
         "temperature": temperature,

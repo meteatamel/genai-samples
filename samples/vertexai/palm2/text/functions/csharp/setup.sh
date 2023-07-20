@@ -14,21 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ../config.sh
+echo "Enable required services for Cloud Functions"
+gcloud services enable \
+  artifactregistry.googleapis.com \
+  cloudbuild.googleapis.com \
+  cloudfunctions.googleapis.com \
+  run.googleapis.com
 
-curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/publishers/google/models/text-bison:predict -d \
-  $'{
-    "instances": [
-      { "prompt": "Give me ten interview questions for the role of program manager."}
-    ],
-    "parameters": {
-      "temperature": 0.2,
-      "maxOutputTokens": 256,
-      "topK": 40,
-      "topP": 0.95
-    }
-  }'
+echo "Enable required services for VertexAI"
+gcloud services enable  \
+  aiplatform.googleapis.com

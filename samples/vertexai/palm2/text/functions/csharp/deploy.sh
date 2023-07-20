@@ -14,21 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source ../config.sh
+source $(dirname $0)/config.sh
 
-curl \
-  -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-  -H "Content-Type: application/json" \
-  https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT_ID}/locations/${REGION}/publishers/google/models/text-bison:predict -d \
-  $'{
-    "instances": [
-      { "prompt": "Give me ten interview questions for the role of program manager."}
-    ],
-    "parameters": {
-      "temperature": 0.2,
-      "maxOutputTokens": 256,
-      "topK": 40,
-      "topP": 0.95
-    }
-  }'
+export ENTRY_POINT=GenAI.Function
+
+echo "Deploy $SERVICE_NAME to $REGION"
+gcloud functions deploy $SERVICE_NAME \
+  --allow-unauthenticated \
+  --entry-point $ENTRY_POINT \
+  --gen2 \
+  --region $REGION \
+  --runtime $RUNTIME \
+  --source . \
+  --trigger-http \
+  --set-env-vars PROJECT_ID=$PROJECT_ID,REGION=$REGION
