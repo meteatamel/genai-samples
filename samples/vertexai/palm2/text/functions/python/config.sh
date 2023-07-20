@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_ID=genai-atamel # Change to your project
 export REGION=us-central1
 
 export FUNCTION_NAME=vertexai-palm2-text
