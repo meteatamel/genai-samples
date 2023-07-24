@@ -35,15 +35,14 @@ var payload = new
     }
 };
 
-using (HttpClient httpClient = new HttpClient())
-{
-    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-    httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+using HttpClient httpClient = new();
 
-    HttpResponseMessage response = await httpClient.PostAsync(apiUrl,
-        new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json"));
+httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-    string responseBody = await response.Content.ReadAsStringAsync();
-    Console.WriteLine($"Response: {response.StatusCode}");
-    Console.WriteLine(responseBody);
-}
+HttpResponseMessage response = await httpClient.PostAsync(apiUrl,
+    new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json"));
+
+string responseBody = await response.Content.ReadAsStringAsync();
+Console.WriteLine($"Response: {response.StatusCode}");
+Console.WriteLine(responseBody);
