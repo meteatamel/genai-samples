@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 using Google.Cloud.Functions.Framework;
+using Google.Cloud.Functions.Hosting;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -20,16 +21,37 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GenAI;
 
+// Dependency injection configuration, executed during server startup.
+public class Startup : FunctionsStartup
+{
+    public override void ConfigureServices(WebHostBuilderContext context, IServiceCollection services)
+    {
+        // Make an HttpClient available to our function via dependency injection.
+        // There are many options here; see
+        // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests
+        // for more details.
+        services.AddHttpClient<IHttpFunction, Function>();
+    }
+}
+
+[FunctionsStartup(typeof(Startup))]
 public class Function : IHttpFunction
 {
+    private readonly HttpClient _httpClient;
+
+    public Function(HttpClient httpClient) =>
+        _httpClient = httpClient;
+
     public async Task HandleAsync(HttpContext context)
     {
         // Set them with 'source ./config.sh'
-        string? PROJECT_ID = Environment.GetEnvironmentVariable("PROJECT_ID");
-        string? REGION = Environment.GetEnvironmentVariable("REGION");
+        string PROJECT_ID = Environment.GetEnvironmentVariable("PROJECT_ID");
+        string REGION = Environment.GetEnvironmentVariable("REGION");
         if (string.IsNullOrEmpty(REGION) || string.IsNullOrEmpty(PROJECT_ID))
         {
             throw new Exception("Environment variable 'REGION' or 'PROJECT_ID' not set.");
@@ -58,17 +80,14 @@ public class Function : IHttpFunction
             }
         };
 
-        using (HttpClient httpClient = new HttpClient())
-        {
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = await httpClient.PostAsync(apiUrl,
-                new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json"));
+        HttpResponseMessage response = await _httpClient.PostAsync(apiUrl,
+            new StringContent(JsonConvert.SerializeObject(payload), Encoding.UTF8, "application/json"));
 
-            string responseBody = await response.Content.ReadAsStringAsync();
-            await context.Response.WriteAsync($"Response: {response.StatusCode}");
-            await context.Response.WriteAsync(responseBody);
-        }
+        string responseBody = await response.Content.ReadAsStringAsync();
+        await context.Response.WriteAsync($"Response: {response.StatusCode}");
+        await context.Response.WriteAsync(responseBody);
     }
 }
