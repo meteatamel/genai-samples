@@ -1,0 +1,4 @@
+google-auth
+google-cloud-aiplatform
+Pillow
+requests
