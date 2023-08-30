@@ -15,8 +15,14 @@ Install dependencies:
 pip3 install -r requirements.txt
 ```
 
-Run:
+Run the Python SDK sample:
 
 ```bash
 python3 imagegen.py
+```
+
+Run the REST sample:
+
+```bash
+python imagen_rest.py
 ```
