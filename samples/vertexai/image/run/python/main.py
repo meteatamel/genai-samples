@@ -11,92 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
-import base64
-import google.auth
-import google.auth.transport.requests
-import json
 import os
-import requests
-
-from flask import Flask
+from flask import Flask, request
 from google.cloud import storage
 from io import BytesIO
-from PIL import Image
+from vertexai.preview.vision_models import ImageGenerationModel
 
 app = Flask(__name__)
 
-PROJECT_ID = "genai-atamel"
-LOCATION = "us-central1"
-
-AI_PLATFORM_URL = f"https://{LOCATION}-aiplatform.googleapis.com"
-IMAGE_MODEL_NAME = "imagegeneration"
-PREDICT_URL = f"{AI_PLATFORM_URL}/v1/projects/{PROJECT_ID}/locations/{LOCATION}/publishers/google/models/{IMAGE_MODEL_NAME}:predict"
-
 BUCKET_NAME = "genai-atamel-images"
 
-def get_access_token():
-    credentials, project_id = google.auth.default()
-    auth_req = google.auth.transport.requests.Request()
-    credentials.refresh(auth_req)
-    return credentials.token
-
-def generate_payload_json(access_token, prompt, **kwargs):
-    negative_prompt = kwargs.get("negative_prompt")
-    sample_count = kwargs.get("sample_count")
-    sample_image_size = kwargs.get("sample_image_size")
-    guidance_scale = kwargs.get("guidance_scale")
-    seed = kwargs.get("seed")
-    # base_image = kwargs.get("base_image")
-    # mask = kwargs.get("mask")
-    mode = kwargs.get("mode")
-
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json; charset=utf-8",
-    }
-
-    data = {
-        "instances": [
-            {
-                "prompt": prompt,
-            }
-        ],
-        "parameters": {
-            "negativePrompt": negative_prompt,
-            "sampleCount": sample_count,
-            "sampleImageSize": sample_image_size,
-            "seed": seed,
-            "guidanceScale": guidance_scale,
-            "mode": mode,
-        }
-    }
-
-    return headers, json.dumps(data)
-
-def send_request(headers, data):
-    response = requests.post(PREDICT_URL, headers=headers, data=data)
-
-    if response.status_code != 200:
-        raise requests.exceptions.HTTPError(f"Error: {response.status_code} ({response.reason})")
-
-    return response.json()
-
-def generate_images(prompt, **kwargs):
-    access_token = get_access_token()
-    headers, data = generate_payload_json(access_token, prompt, **kwargs)
-    response = send_request(headers, data)
-
-    images = []
-    if response:
-        predictions = response.get("predictions")
-        if predictions:
-            for prediction in predictions:
-                b64_decoded_string = base64.b64decode(prediction["bytesBase64Encoded"])
-                img = Image.open(BytesIO(b64_decoded_string))
-                images.append(img)
-        else:
-            print(f"No predictions for prompt: {prompt}")
-    return images
 
 def upload_images_to_gcs(images):
     # TODO: Create the bucket if it doesn't exist
@@ -104,13 +28,14 @@ def upload_images_to_gcs(images):
         file_name = f"image_{idx}.png"
         upload_image_to_gcs(image, file_name)
 
+
 def upload_image_to_gcs(image, file_name, bucket_name=BUCKET_NAME):
     client = storage.Client()
     bucket = client.bucket(bucket_name)
     blob = bucket.blob(file_name)
 
     bytes_io = BytesIO()
-    image.save(bytes_io, format='PNG')
+    image._pil_image.save(bytes_io, format='PNG')
     blob.upload_from_file(bytes_io, rewind=True, content_type="image/png")
 
     blob.make_public()
@@ -118,11 +43,24 @@ def upload_image_to_gcs(image, file_name, bucket_name=BUCKET_NAME):
     print(f"Uploaded file: {file_name} to bucket: {bucket_name} with file url: {file_url}")
     return file_url
 
+
+def generate_images(prompt, number_of_images):
+    model = ImageGenerationModel.from_pretrained("imagegeneration")
+    images = model.generate_images(
+        prompt=prompt,
+        number_of_images=number_of_images,
+    )
+    return images
+
+
 @app.route("/")
-def hello_world():
-    images = generate_images("happy dogs", sample_count=4)
+def main():
+    number_of_images = request.args.get("images", default=1, type=int)
+    prompt = request.args.get("prompt", default="happy dogs", type=str)
+
+    images = generate_images(prompt, number_of_images)
     upload_images_to_gcs(images)
-    return f"Created images {len(images)}!"
+    return f"Created {number_of_images} image(s) with prompt: {prompt}"
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ python3 main.py
 Test locally:
 
 ```bash
-curl http://localhost:8080
+curl http://localhost:8080/?images=2&prompt=happy%20cats
 ```
 
 Deploy to cloud:
