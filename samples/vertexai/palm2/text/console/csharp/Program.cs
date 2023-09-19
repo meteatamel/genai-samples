@@ -1,4 +1,5 @@
 ﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
@@ -13,9 +14,6 @@ if (string.IsNullOrEmpty(REGION) || string.IsNullOrEmpty(PROJECT_ID))
 }
 
 string apiUrl = $"https://{REGION}-aiplatform.googleapis.com/v1/projects/{PROJECT_ID}/locations/{REGION}/publishers/google/models/text-bison:predict";
-
-GoogleCredential credential = GoogleCredential.GetApplicationDefault();
-var token = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
 
 var payload = new
 {
@@ -35,9 +33,12 @@ var payload = new
     }
 };
 
-using HttpClient httpClient = new();
+GoogleCredential credential = GoogleCredential.GetApplicationDefault();
+//var token = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
+var handler = credential.ToDelegatingHandler(new HttpClientHandler());
+using HttpClient httpClient = new HttpClient(handler);
+//httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 HttpResponseMessage response = await httpClient.PostAsync(apiUrl,
