@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
-
 public class Program
 {
     const string ProjectId = "genai-atamel";
@@ -74,7 +73,6 @@ public class Program
         string contentString = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<JObject>(contentString);
     }
-
 
     private static async Task SaveImages(List<Image> images, string folder)
     {
