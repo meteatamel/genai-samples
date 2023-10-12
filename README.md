@@ -11,5 +11,7 @@ This repository contains a collection of GenAI samples.
 * [VertexAI Palm2 text, console, Python](./samples/vertexai/palm2/text/console/python/)
 * [VertexAI Palm2 text, Cloud Functions, C#](./samples/vertexai/palm2/text/functions/csharp/)
 * [VertexAI Palm2 text, Cloud Functions, Python](./samples/vertexai/palm2/text/functions/python/)
-* [VertexAI image generation, console, Python](./samples/vertexai/image/console/python/)
 * [VertexAI image generation, console, C#](./samples/vertexai/image/console/csharp/)
+* [VertexAI image generation, console, Python](./samples/vertexai/image/console/python/)
+* [VertexAI image generation, Cloud Run, C#](./samples/vertexai/image/run/csharp/)
+* [VertexAI image generation, Cloud Run, Python](./samples/vertexai/image/run/python/)
