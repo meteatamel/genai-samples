@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-// Set them with 'source ../../config.sh'
-string? PROJECT_ID = Environment.GetEnvironmentVariable("PROJECT_ID");
-string? REGION = Environment.GetEnvironmentVariable("REGION");
+// Adjust for your project
+const string PROJECT_ID = "genai-atamel";
+const string REGION = "us-central1";
 
 if (string.IsNullOrEmpty(REGION) || string.IsNullOrEmpty(PROJECT_ID))
 {
@@ -36,7 +36,7 @@ var payload = new
 GoogleCredential credential = GoogleCredential.GetApplicationDefault();
 //var token = await credential.UnderlyingCredential.GetAccessTokenForRequestAsync();
 var handler = credential.ToDelegatingHandler(new HttpClientHandler());
-using HttpClient httpClient = new HttpClient(handler);
+using HttpClient httpClient = new(handler);
 //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
