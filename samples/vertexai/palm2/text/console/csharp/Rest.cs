@@ -18,7 +18,11 @@ public class Rest
     {
         string payload = GeneratePayload(prompt);
         string response = await SendRequest(payload);
-        return response;
+        Console.WriteLine("Response: " + response);
+
+        dynamic responseJson = JsonConvert.DeserializeObject(response);
+        string content = responseJson.predictions[0].content;
+        return content;
     }
 
     private static string GeneratePayload(string prompt)

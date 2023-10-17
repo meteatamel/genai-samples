@@ -2,8 +2,9 @@
 {
     static async Task Main(string[] args)
     {
-        //var text = await Rest.GenerateText("Give me ten interview questions for the role of program manager.");
-        //Console.WriteLine($"Response: {text}");
-        await Library.Test();
+        string prompt = "Give me ten interview questions for the role of program manager.";
+        //var content = await Rest.GenerateText(prompt);
+        var content = await Library.GenerateText(prompt);
+        Console.WriteLine($"Content: {content}");
     }
 }
