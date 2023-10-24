@@ -4,29 +4,34 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
 
-public class Rest
+public class Program
 {
-    // Adjust for your project
-    const string ProjectId = "genai-atamel";
-    const string Location = "us-central1";
+    static readonly string? ProjectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+    static readonly string? Region = Environment.GetEnvironmentVariable("REGION");
 
-    const string AiPlatformUrl = $"https://{Location}-aiplatform.googleapis.com";
+    static readonly string AiPlatformUrl = $"https://{Region}-aiplatform.googleapis.com";
     const string ModelName = "text-bison";
-    const string PredictUrl = $"{AiPlatformUrl}/v1/projects/{ProjectId}/locations/{Location}/publishers/google/models/{ModelName}:predict";
+    static readonly string PredictUrl = $"{AiPlatformUrl}/v1/projects/{ProjectId}/locations/{Region}/publishers/google/models/{ModelName}:predict";
 
-    public async static Task<string> GenerateText(string prompt)
+    private async static Task<string> GenerateText(string prompt)
     {
+        if (string.IsNullOrEmpty(ProjectId) || string.IsNullOrEmpty(Region))
+        {
+            throw new Exception("Environment variable 'PROJECT_ID' or 'REGION' not set.");
+        }
+
         string payload = GeneratePayload(prompt);
         string response = await SendRequest(payload);
         Console.WriteLine("Response: " + response);
 
-        dynamic responseJson = JsonConvert.DeserializeObject(response);
+        dynamic? responseJson = JsonConvert.DeserializeObject(response);
         string content = responseJson.predictions[0].content;
         return content;
     }
 
     private static string GeneratePayload(string prompt)
     {
+        // Get payload
         var payload = new
         {
             instances = new[]
@@ -60,5 +65,12 @@ public class Rest
 
         string content = await response.Content.ReadAsStringAsync();
         return content;
+    }
+
+    static async Task Main()
+    {
+        string prompt = "Give me ten interview questions for the role of program manager.";
+        var content = await GenerateText(prompt);
+        Console.WriteLine($"Content: {content}");
     }
 }

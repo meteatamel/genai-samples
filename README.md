@@ -2,9 +2,13 @@
 
 This repository contains a collection of GenAI samples.
 
-* [VertexAI Palm2 text, console, curl](./vertexai/palm2-text/console/curl/)
-* [VertexAI Palm2 text, console, C#](./vertexai/palm2-text/console/csharp/)
-* [VertexAI Palm2 text, console, Python](./vertexai/palm2-text/console/python/)
+| Functionality | Running on | Language | API/Library | Sample |
+| --- | --- | --- | --- | --- |
+| VertexAI - PaLM 2 for Text | Console | Curl | VertexAI REST API | [Sample](./vertexai/palm2-text/console/curl/) |
+| VertexAI - PaLM 2 for Text | Console | C# | VertexAI REST API | [Sample](./vertexai/palm2-text/console/csharp/rest) |
+| VertexAI - PaLM 2 for Text | Console | C# | VertexAI SDK | [Sample](./vertexai/palm2-text/console/csharp/sdk/) |
+| VertexAI - PaLM 2 for Text | Console | Python | VertexAI SDK | [Sample](./vertexai/palm2-text/console/python/sdk) |
+
 * [VertexAI Palm2 text, Cloud Functions, C#](./vertexai/palm2-text/functions/csharp/)
 * [VertexAI Palm2 text, Cloud Functions, Python](./vertexai/palm2-text/functions/python/)
 * [VertexAI image generation, console, C#](./vertexai/imagegen/console/csharp/)

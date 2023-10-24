@@ -2,18 +2,22 @@
 using wkt = Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json;
 
-public class Library
+public class Program
 {
-    // Adjust for your project
-    const string ProjectId = "genai-atamel";
-    const string Location = "us-central1";
+    static readonly string? ProjectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+    static readonly string? Region = Environment.GetEnvironmentVariable("REGION");
 
-    const string AiPlatformUrl = $"https://{Location}-aiplatform.googleapis.com";
+    static readonly string AiPlatformUrl = $"https://{Region}-aiplatform.googleapis.com";
     const string Publisher = "google";
     const string ModelName = "text-bison";
 
     public async static Task<string> GenerateText(string prompt)
     {
+        if (string.IsNullOrEmpty(ProjectId) || string.IsNullOrEmpty(Region))
+        {
+            throw new Exception("Environment variable 'PROJECT_ID' or 'REGION' not set.");
+        }
+
         var instance = new
         {
             prompt = prompt
@@ -34,7 +38,7 @@ public class Library
 
         var request = new PredictRequest
         {
-            EndpointAsEndpointName = EndpointName.FromProjectLocationPublisherModel(ProjectId, Location, Publisher, ModelName),
+            EndpointAsEndpointName = EndpointName.FromProjectLocationPublisherModel(ProjectId, Region, Publisher, ModelName),
             Instances = { wkt::Value.Parser.ParseJson(JsonConvert.SerializeObject(instance)) },
             Parameters = wkt::Value.Parser.ParseJson(JsonConvert.SerializeObject(parameters)),
         };
@@ -42,5 +46,12 @@ public class Library
         var response = await client.PredictAsync(request);
         var content = response.Predictions[0].StructValue.Fields["content"].StringValue;
         return content;
+    }
+
+    static async Task Main()
+    {
+        string prompt = "Give me ten interview questions for the role of program manager.";
+        var content = await GenerateText(prompt);
+        Console.WriteLine($"Content: {content}");
     }
 }
