@@ -2,18 +2,22 @@
 using Newtonsoft.Json;
 using wkt = Google.Protobuf.WellKnownTypes;
 
-public class Library
+public class Program
 {
-    // Adjust for your project
-    const string ProjectId = "genai-atamel";
-    const string Location = "us-central1";
+    static readonly string? ProjectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+    static readonly string? Region = Environment.GetEnvironmentVariable("REGION");
 
-    const string AiPlatformUrl = $"https://{Location}-aiplatform.googleapis.com";
+    static readonly string AiPlatformUrl = $"https://{Region}-aiplatform.googleapis.com";
     const string Publisher = "google";
     const string ModelName = "imagegeneration";
 
     public async static Task<List<Image>> GenerateImages(string prompt, int sampleCount)
     {
+        if (string.IsNullOrEmpty(ProjectId) || string.IsNullOrEmpty(Region))
+        {
+            throw new Exception("Environment variable 'PROJECT_ID' or 'REGION' not set.");
+        }
+
         var instance = new
         {
             prompt = prompt
@@ -31,7 +35,7 @@ public class Library
 
         var request = new PredictRequest
         {
-            EndpointAsEndpointName = EndpointName.FromProjectLocationPublisherModel(ProjectId, Location, Publisher, ModelName),
+            EndpointAsEndpointName = EndpointName.FromProjectLocationPublisherModel(ProjectId, Region, Publisher, ModelName),
             Instances = { wkt::Value.Parser.ParseJson(JsonConvert.SerializeObject(instance)) },
             Parameters = wkt::Value.Parser.ParseJson(JsonConvert.SerializeObject(parameters)),
         };
@@ -55,5 +59,28 @@ public class Library
         }
 
         return images;
+    }
+
+    private static async Task SaveImages(List<Image> images, string folder)
+    {
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+
+        for (int idx = 0; idx < images.Count; idx++)
+        {
+            string imgPath = Path.Combine(folder, $"image_{idx}.png");
+
+            using FileStream fs = File.OpenWrite(imgPath);
+            await images[idx].SaveAsPngAsync(fs);
+            Console.WriteLine($"Saved {imgPath}");
+        }
+    }
+
+    static async Task Main()
+    {
+        var images = await GenerateImages("happy dogs", 2);
+        await SaveImages(images, "images");
     }
 }
