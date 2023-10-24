@@ -1,4 +1,2 @@
-google-auth
 google-cloud-aiplatform>=1.31.0
 Pillow
-requests

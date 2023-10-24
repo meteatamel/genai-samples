@@ -7,12 +7,12 @@ import requests
 from io import BytesIO
 from PIL import Image
 
-PROJECT_ID = "genai-atamel"
-LOCATION = "us-central1"
+PROJECT_ID = os.environ['PROJECT_ID']
+REGION = os.environ['REGION']
 
-AI_PLATFORM_URL = f"https://{LOCATION}-aiplatform.googleapis.com"
-IMAGE_MODEL_NAME = "imagegeneration"
-PREDICT_URL = f"{AI_PLATFORM_URL}/v1/projects/{PROJECT_ID}/locations/{LOCATION}/publishers/google/models/{IMAGE_MODEL_NAME}:predict"
+AI_PLATFORM_URL = f"https://{REGION}-aiplatform.googleapis.com"
+MODEL_NAME = "imagegeneration"
+PREDICT_URL = f"{AI_PLATFORM_URL}/v1/projects/{PROJECT_ID}/locations/{REGION}/publishers/google/models/{MODEL_NAME}:predict"
 
 def get_access_token():
     credentials, project_id = google.auth.default()

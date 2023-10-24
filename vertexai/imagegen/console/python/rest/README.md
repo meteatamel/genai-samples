@@ -1,4 +1,4 @@
-# | VertexAI - Imagegen | Console | C# | VertexAI REST API |
+# | VertexAI - Imagegen | Console | Python | VertexAI REST API |
 
 Enable required services:
 
@@ -19,8 +19,14 @@ export PROJECT_ID=genai-atamel
 export REGION=us-central1
 ```
 
+Install dependencies:
+
+```sh
+pip3 install -r requirements.txt
+```
+
 Run:
 
 ```bash
-dotnet run
+python3 imagegen.py
 ```

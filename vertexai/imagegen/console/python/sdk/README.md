@@ -1,4 +1,4 @@
-# | VertexAI - Imagegen | Console | C# | VertexAI REST API |
+# VertexAI image generation, console, Python
 
 Enable required services:
 
@@ -12,15 +12,14 @@ Login:
 gcloud auth application-default login
 ```
 
-Set your `PROJECT_ID` and `REGION`:
+Install dependencies:
 
 ```sh
-export PROJECT_ID=genai-atamel
-export REGION=us-central1
+pip3 install -r requirements.txt
 ```
 
 Run:
 
 ```bash
-dotnet run
+python3 imagegen.py
 ```
