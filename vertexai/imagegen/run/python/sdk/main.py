@@ -19,30 +19,7 @@ from vertexai.preview.vision_models import ImageGenerationModel
 
 app = Flask(__name__)
 
-BUCKET_NAME = "genai-atamel-images"
-
-
-def upload_images_to_gcs(images):
-    # TODO: Create the bucket if it doesn't exist
-    for idx, image in enumerate(images):
-        file_name = f"image_{idx}.png"
-        upload_image_to_gcs(image, file_name)
-
-
-def upload_image_to_gcs(image, file_name, bucket_name=BUCKET_NAME):
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    blob = bucket.blob(file_name)
-
-    bytes_io = BytesIO()
-    image._pil_image.save(bytes_io, format='PNG')
-    blob.upload_from_file(bytes_io, rewind=True, content_type="image/png")
-
-    blob.make_public()
-    file_url = blob.public_url
-    print(f"Uploaded file: {file_name} to bucket: {bucket_name} with file url: {file_url}")
-    return file_url
-
+BUCKET_NAME = os.environ['BUCKET_NAME']
 
 def generate_images(prompt, number_of_images):
     model = ImageGenerationModel.from_pretrained("imagegeneration")
@@ -52,6 +29,25 @@ def generate_images(prompt, number_of_images):
     )
     return images
 
+def upload_images_to_gcs(images):
+    for idx, image in enumerate(images):
+        file_name = f"image_{idx}.png"
+        upload_image_to_gcs(image, file_name)
+
+
+def upload_image_to_gcs(image, file_name):
+    client = storage.Client()
+    bucket = client.bucket(BUCKET_NAME)
+    blob = bucket.blob(file_name)
+
+    bytes_io = BytesIO()
+    image._pil_image.save(bytes_io, format='PNG')
+    blob.upload_from_file(bytes_io, rewind=True, content_type="image/png")
+
+    blob.make_public()
+    file_url = blob.public_url
+    print(f"Uploaded file: {file_name} to bucket: {BUCKET_NAME} with file url: {file_url}")
+    return file_url
 
 @app.route("/")
 def main():
