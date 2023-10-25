@@ -14,6 +14,6 @@ This repository contains a collection of GenAI samples.
 | [Sample](./vertexai/imagegen/console/csharp/sdk) | VertexAI - Imagegen | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
 | [Sample](./vertexai/imagegen/console/python/rest) | VertexAI - Imagegen | Console | Python | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/imagegen/console/python/sdk) | VertexAI - Imagegen | Console | Python | [Vertex AI SDK for Python](https://cloud.google.com/python/docs/reference/aiplatform/latest/vertexai.preview.vision_models.ImageGenerationModel) |
+| [Sample](./vertexai/imagegen/run/csharp/rest) | VertexAI - Imagegen | Cloud Run | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 
-* [VertexAI image generation, Cloud Run, C#](./vertexai/imagegen/run/csharp/)
 * [VertexAI image generation, Cloud Run, Python](./vertexai/imagegen/run/python/)

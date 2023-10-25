@@ -19,39 +19,17 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using Google.Cloud.Storage.V1;
-using Microsoft.Extensions.Options;
-using Google.Apis.Logging;
 
 public class Program
 {
-    const string ProjectId = "genai-atamel";
-    const string Location = "us-central1";
 
-    const string AiPlatformUrl = $"https://{Location}-aiplatform.googleapis.com";
+    static readonly string? ProjectId = Environment.GetEnvironmentVariable("PROJECT_ID");
+    static readonly string? Region = Environment.GetEnvironmentVariable("REGION");
+    static readonly string? BucketName = Environment.GetEnvironmentVariable("BUCKET_NAME");
+
+    static readonly string AiPlatformUrl = $"https://{Region}-aiplatform.googleapis.com";
     const string ModelName = "imagegeneration";
-    const string PredictUrl = $"{AiPlatformUrl}/v1/projects/{ProjectId}/locations/{Location}/publishers/google/models/{ModelName}:predict";
-
-    const string BUCKET_NAME = "genai-atamel-images";
-
-    private static async Task UploadImagesToGcs(List<Image> images)
-    {
-        foreach (var (image, idx) in images.Select((value, index) => (value, index)))
-        {
-            string fileName = $"image_{idx}.png";
-            await UploadImageToGcs(image, fileName);
-        }
-    }
-
-    private static async Task UploadImageToGcs(Image image, string fileName, string bucketName = BUCKET_NAME)
-    {
-        var client = await StorageClient.CreateAsync();
-        using var outputStream = new MemoryStream();
-        await image.SaveAsPngAsync(outputStream);
-        var publicRead = new UploadObjectOptions { PredefinedAcl = PredefinedObjectAcl.PublicRead };
-        var blob = await client.UploadObjectAsync(bucketName, fileName, "image/png", outputStream, publicRead);
-
-        Console.WriteLine($"Uploaded file: {fileName} to bucket: {bucketName} with file URL: {blob.MediaLink}");
-    }
+    static readonly string PredictUrl = $"{AiPlatformUrl}/v1/projects/{ProjectId}/locations/{Region}/publishers/google/models/{ModelName}:predict";
 
     private async static Task<List<Image>> GenerateImages(string prompt, int sampleCount)
     {
@@ -111,6 +89,26 @@ public class Program
 
         string contentString = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<JObject>(contentString);
+    }
+
+    private static async Task UploadImagesToGcs(List<Image> images)
+    {
+        foreach (var (image, idx) in images.Select((value, index) => (value, index)))
+        {
+            string fileName = $"image_{idx}.png";
+            await UploadImageToGcs(image, fileName);
+        }
+    }
+
+    private static async Task UploadImageToGcs(Image image, string fileName)
+    {
+        var client = await StorageClient.CreateAsync();
+        using var outputStream = new MemoryStream();
+        await image.SaveAsPngAsync(outputStream);
+        var publicRead = new UploadObjectOptions { PredefinedAcl = PredefinedObjectAcl.PublicRead };
+        var blob = await client.UploadObjectAsync(BucketName, fileName, "image/png", outputStream, publicRead);
+
+        Console.WriteLine($"Uploaded file: {fileName} to bucket: {BucketName} with file URL: {blob.MediaLink}");
     }
 
     static async Task Main(string[] args)

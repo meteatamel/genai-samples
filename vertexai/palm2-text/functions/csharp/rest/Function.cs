@@ -49,7 +49,6 @@ public class Function : IHttpFunction
 
     public async Task HandleAsync(HttpContext context)
     {
-        // Set them with 'source ./config.sh'
         string PROJECT_ID = Environment.GetEnvironmentVariable("PROJECT_ID");
         string REGION = Environment.GetEnvironmentVariable("REGION");
         if (string.IsNullOrEmpty(REGION) || string.IsNullOrEmpty(PROJECT_ID))

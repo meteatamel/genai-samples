@@ -20,14 +20,8 @@ gcloud auth application-default login
 Set your `PROJECT_ID` and `REGION`:
 
 ```sh
-PROJECT_ID=genai-atamel
-REGION=us-central1
-```
-
-Build:
-
-```sh
-dotnet build
+export PROJECT_ID=genai-atamel
+export REGION=us-central1
 ```
 
 Run locally:
