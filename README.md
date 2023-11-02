@@ -1,6 +1,12 @@
 # GenAI Samples
 
-This repository contains a collection of GenAI samples.
+A repository to collect GenAI related samples and links.
+
+## Samples (Official)
+
+* [All VertexAI GenAI code samples](https://cloud.google.com/vertex-ai/docs/samples?text=generative)
+
+## Samples (In this repo)
 
 | Sample | Showing | Running on | Language | Using |
 | --- | --- | --- | --- | --- |
