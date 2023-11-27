@@ -2,9 +2,16 @@
 
 A repository to collect GenAI related samples and links.
 
-## Samples (Official)
+## Links
 
-* [All VertexAI GenAI code samples](https://cloud.google.com/vertex-ai/docs/samples?text=generative)
+* [Official VertexAI GenAI code samples](https://cloud.google.com/vertex-ai/docs/samples?text=generative)
+* [Vertex AI SDK and client libraries](https://cloud.google.com/vertex-ai/docs/start/client-libraries)
+  * [Python reference](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk)
+  * [C# reference](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest)
+  * [Go reference](https://cloud.google.com/go/docs/reference/cloud.google.com/go/aiplatform/latest/apiv1)
+  * [Java reference](https://cloud.google.com/java/docs/reference/google-cloud-aiplatform/latest/overview)
+  * [Node.js reference](https://cloud.google.com/nodejs/docs/reference/aiplatform/latest)
+  * [Ruby reference](https://cloud.google.com/ruby/docs/reference/google-cloud-ai_platform/latest)
 
 ## Samples (In this repo)
 
