@@ -17,7 +17,8 @@ A repository to collect GenAI related samples and links.
 
 | Sample | Showing | Running on | Language | Using |
 | --- | --- | --- | --- | --- |
-| [Samples](./vertexai/gemini/console/csharp/rest/) | VertexAI - Gemini Text from Text & Image | Console | C# | |
+| [Samples](./vertexai/gemini/console/csharp/rest/) | VertexAI - Gemini Text from Text & Image | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
+| [Samples](./vertexai/gemini/console/curl/) | VertexAI - Gemini Text from Text | Console | Curl | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/curl/) | VertexAI - PaLM 2 for Text | Console | Curl | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/csharp/rest) | VertexAI - PaLM 2 for Text | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/csharp/sdk) | VertexAI - PaLM 2 for Text | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
