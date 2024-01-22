@@ -10,7 +10,7 @@ public class GenerateTextFromImageGcs
     const string Location = "us-central1";
     const string AiPlatformUrl = $"https://{Location}-aiplatform.googleapis.com";
     const string ModelId = "gemini-pro-vision";
-    const string EndpointUrl = $"{AiPlatformUrl}/v1beta1/projects/{ProjectId}/locations/{Location}/publishers/google/models/{ModelId}:streamGenerateContent";
+    const string EndpointUrl = $"{AiPlatformUrl}/v1/projects/{ProjectId}/locations/{Location}/publishers/google/models/{ModelId}:streamGenerateContent";
 
     public async static Task Generate()
     {
