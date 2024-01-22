@@ -14,13 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PROJECT_ID="cloud-llm-preview1"
+PROJECT_ID="genai-atamel"
 LOCATION="us-central1"
 API_ENDPOINT=${LOCATION}-aiplatform.googleapis.com
 MODEL_ID="gemini-pro"
 
 curl -X POST -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-    -H "Content-Type: application/json"  \
+    --no-buffer -H "Content-Type: application/json"  \
     https://${API_ENDPOINT}/v1beta1/projects/${PROJECT_ID}/locations/${LOCATION}/publishers/google/models/${MODEL_ID}:streamGenerateContent -d \
     $'{
       "contents": {
