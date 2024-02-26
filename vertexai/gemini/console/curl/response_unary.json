@@ -1,0 +1,59 @@
+{
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The sky appears blue because of a phenomenon called Rayleigh scattering. This occurs when sunlight passes through the Earth's atmosphere and interacts with molecules of nitrogen and oxygen. These molecules are much smaller than the wavelength of visible light, so they scatter the light in all directions. However, blue light is scattered more than other colors because it has a shorter wavelength. This means that more blue light reaches our eyes from all directions, making the sky appear blue."
+            }
+          ]
+        },
+        "finishReason": "STOP",
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.07531231,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.03204008
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.11899801,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.037326887
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.17217183,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.020804489
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.09518112,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.021990221
+          }
+        ],
+        "citationMetadata": {
+          "citations": [
+            {
+              "startIndex": 287,
+              "endIndex": 413,
+              "uri": "https://www.numerade.com/ask/question/when-particles-scattering-light-are-much-smaller-than-its-wavelength-the-amount-of-scattering-is-pro-73436/"
+            }
+          ]
+        }
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 6,
+      "candidatesTokenCount": 89,
+      "totalTokenCount": 95
+    }
+  }

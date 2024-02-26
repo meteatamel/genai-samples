@@ -1,0 +1,231 @@
+[{
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "The sky appears blue due to a phenomenon called Rayleigh scattering. This occurs when sunlight, which is composed of all colors of the visible spectrum, passes through the Earth"
+            }
+          ]
+        },
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.078359805,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.025468083
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.16118816,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.049497053
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.13217813,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.014957086
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.059210256,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.020884216
+          }
+        ]
+      }
+    ]
+  }
+  ,
+  {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": "'s atmosphere. The atmosphere is made up of tiny particles, such as molecules and dust, that are much smaller than the wavelength of visible light.\n\nAs"
+            }
+          ]
+        },
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.050144248,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.022286186
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.13881165,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.040616777
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.12538631,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.016029147
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.06928941,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.01243165
+          }
+        ]
+      }
+    ]
+  }
+  ,
+  {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": " sunlight passes through the atmosphere, these particles scatter the light in all directions. However, the amount of scattering depends on the wavelength of the light. Shorter wavelengths, such as blue light, are scattered more than longer wavelengths, such as red light. This is because the shorter wavelengths have a higher frequency and therefore interact more with"
+            }
+          ]
+        },
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.047425874,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.022542965
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.10248422,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.03507868
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.111627996,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.016979992
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.12033541,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.015906392
+          }
+        ]
+      }
+    ]
+  }
+  ,
+  {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": " the particles in the atmosphere.\n\nAs a result, more blue light is scattered in all directions, which means that when we look up at the sky, we see more blue light than any other color. This is why the sky appears blue during the day.\n\nAt sunset and sunrise, the sunlight has to travel through"
+            }
+          ]
+        },
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.051177494,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.030675804
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.07356305,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.047074173
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.10970578,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.019493872
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.08961382,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.022457052
+          }
+        ]
+      }
+    ]
+  }
+  ,
+  {
+    "candidates": [
+      {
+        "content": {
+          "role": "model",
+          "parts": [
+            {
+              "text": " more of the atmosphere to reach our eyes. This means that more of the blue light is scattered away, and we see more of the longer wavelengths, such as red and orange. This is why the sky appears red or orange at these times of day."
+            }
+          ]
+        },
+        "finishReason": "STOP",
+        "safetyRatings": [
+          {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.053206205,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.039342504
+          },
+          {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.06221698,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.050988145
+          },
+          {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.107250325,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.021656677
+          },
+          {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "probability": "NEGLIGIBLE",
+            "probabilityScore": 0.08929565,
+            "severity": "HARM_SEVERITY_NEGLIGIBLE",
+            "severityScore": 0.025858775
+          }
+        ]
+      }
+    ],
+    "usageMetadata": {
+      "promptTokenCount": 6,
+      "candidatesTokenCount": 243,
+      "totalTokenCount": 249
+    }
+  }
+  ]%            
