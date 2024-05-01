@@ -2,8 +2,8 @@
 {
     static async Task Main()
     {
-        await GenerateTextFromText.Generate();
+        //await GenerateTextFromText.Generate();
         //await GenerateTextFromImageLocal.Generate();
-        //await GenerateTextFromImageGcs.Generate();
+        await GenerateTextFromImageGcs.Generate();
     }
 }

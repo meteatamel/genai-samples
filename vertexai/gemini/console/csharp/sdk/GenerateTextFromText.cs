@@ -6,7 +6,10 @@ public class GenerateTextFromText
     const string ProjectId = "genai-atamel";
     const string Location = "us-central1";
     const string Publisher = "google";
-    const string Model = "gemini-pro";
+    const string Model_Gemini_1_0 = "gemini-1.0-pro-002";
+    const string Model_Gemini_1_5 = "gemini-1.5-pro-preview-0409";
+
+    const string Model = Model_Gemini_1_5;
 
     public async static Task Generate()
     {
