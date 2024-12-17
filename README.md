@@ -4,6 +4,7 @@ A repository to collect GenAI related samples and links.
 
 ## Links
 
+* [New: Google Gen AI SDKs - unified SDK to Gemini 2.0 Gemini Developer API (Google AI) and the Gemini API on Vertex AI](https://cloud.google.com/vertex-ai/generative-ai/docs/sdks/overview)
 * [Official VertexAI GenAI code samples](https://cloud.google.com/vertex-ai/docs/samples?text=generative)
 * [Vertex AI SDK and client libraries](https://cloud.google.com/vertex-ai/docs/start/client-libraries)
   * [Python reference](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk)
@@ -17,9 +18,10 @@ A repository to collect GenAI related samples and links.
 
 | Sample | Showing | Running on | Language | Using |
 | --- | --- | --- | --- | --- |
-| [Samples](./vertexai/gemini/console/csharp/sdk/) | VertexAI - Gemini Text from Text & Image | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
-| [Samples](./vertexai/gemini/console/csharp/rest/) | VertexAI - Gemini Text from Text & Image | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
-| [Samples](./vertexai/gemini/console/curl/) | VertexAI - Gemini Text from Text | Console | Curl | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
+| [Sample](./vertexai/gemini2/console/python/genai-sdk/) | Gemini2 on Google AI and Vertex AI with Google Gen AI SDK | Console | Python | [Google Gen AI SDK](https://googleapis.github.io/python-genai/) |
+| [Sample](./vertexai/gemini/console/csharp/sdk/) | VertexAI - Gemini Text from Text & Image | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
+| [Sample](./vertexai/gemini/console/csharp/rest/) | VertexAI - Gemini Text from Text & Image | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
+| [Sample](./vertexai/gemini/console/curl/) | VertexAI - Gemini Text from Text | Console | Curl | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/curl/) | VertexAI - PaLM 2 for Text | Console | Curl | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/csharp/rest) | VertexAI - PaLM 2 for Text | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
 | [Sample](./vertexai/palm2-text/console/csharp/sdk) | VertexAI - PaLM 2 for Text | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
