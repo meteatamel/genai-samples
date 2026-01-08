@@ -18,6 +18,7 @@ A repository to collect GenAI related samples and links.
 
 | Sample | Showing | Running on | Language | Using |
 | --- | --- | --- | --- | --- |
+| [Sample](./vertexai/Google.Cloud.VertexAI.Extensions.Samples/) | Snippets that show how to use Vertex AI implementation of Microsoft.Extensions.AI | Console | C# | [Google.Cloud.VertexAI.Extensions](https://www.nuget.org/packages/Google.Cloud.VertexAI.Extensions) |
 | [Sample](./vertexai/gemini2/hello-world/) | Gemini2 on Google AI and Vertex AI with Google Gen AI SDK | Console | Python | [Google Gen AI SDK](https://googleapis.github.io/python-genai/) |
 | [Sample](./vertexai/gemini/console/csharp/sdk/) | VertexAI - Gemini Text from Text & Image | Console | C# | [Google.Cloud.AIPlatform.V1 library](https://cloud.google.com/dotnet/docs/reference/Google.Cloud.AIPlatform.V1/latest/Google.Cloud.AIPlatform.V1.PredictionServiceClient) |
 | [Sample](./vertexai/gemini/console/csharp/rest/) | VertexAI - Gemini Text from Text & Image | Console | C# | [VertexAI REST API](https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.publishers.models) |
