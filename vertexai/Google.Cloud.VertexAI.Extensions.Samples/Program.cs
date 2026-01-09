@@ -2,6 +2,7 @@
 using Google.Cloud.AIPlatform.V1;
 using Google.Cloud.VertexAI.Extensions;
 using Microsoft.Extensions.AI;
+using OllamaSharp;
 
 // Snippets that show how to use Google.Cloud.VertexAI.Extensions library
 // Vertex AI implementation of Microsoft.Extensions.AI
@@ -9,12 +10,23 @@ using Microsoft.Extensions.AI;
 string projectId = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_PROJECT") ?? throw new InvalidOperationException("GOOGLE_CLOUD_PROJECT environment variable is not set");
 string location = Environment.GetEnvironmentVariable("GOOGLE_CLOUD_LOCATION") ?? "us-central1";
 
+
+// await IChatClient_BasicRequestResponse_Ollama();
 await IChatClient_BasicRequestResponse();
 // await IChatClient_BasicRequestResponse_Streaming();
 // await IChatClient_ChatExample();
 // await IChatClient_ChatExample_Streaming();
 // await IEmbeddingGenerator_EmbedSeveralInputs();
 // await ImageGenerator_GenerateImage();
+
+async Task IChatClient_BasicRequestResponse_Ollama()
+{
+    IChatClient client = new OllamaApiClient(
+        new Uri("http://localhost:11434/"), "gemma3:270m");
+
+    var response = await client.GetResponseAsync("Why is sky blue?");
+    Console.WriteLine(response.Text);
+}
 
 async Task IChatClient_BasicRequestResponse()
 {
