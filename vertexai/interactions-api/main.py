@@ -1,10 +1,11 @@
 """
 These samples demonstrates how to use the new Interactions API.
 """
+import base64
+import datetime
+import sys
 import time
 import wave
-import base64
-import sys
 from google import genai
 
 MODEL = "gemini-3-flash-preview"
@@ -24,16 +25,46 @@ def basic_generate_content():
     print(response.text)
 
 
-def basic_interactions():
+def basic_interaction():
     """Generate text using the new Interactions API."""
     client = genai.Client()
 
     interaction = client.interactions.create(
         model=MODEL,
-        input="Tell me a short joke about programming."
+        input="Tell me a short joke about programming.",
+        generation_config={
+            "temperature": 0.7,
+            "max_output_tokens": 500,
+            "thinking_level": "low",
+            "thinking_summaries": "auto"
+        }
     )
 
     print(interaction.outputs[-1].text)
+
+def basic_interaction_stream():
+    """Generate text using the new Interactions API in a streaming fashion."""
+    client = genai.Client()
+
+    prompt = "Explain quantum entanglement in simple terms."
+
+    stream = client.interactions.create(
+        model=MODEL,
+        input=prompt,
+        stream=True
+    )
+
+    print(f"User: {prompt}")
+    print("Model:")
+    for chunk in stream:
+        if chunk.event_type == "content.delta":
+            if chunk.delta.type == "text":
+                print(chunk.delta.text, end="", flush=True)
+            elif chunk.delta.type == "thought":
+                print(chunk.delta.thought, end="", flush=True)
+        if chunk.event_type == "interaction.complete":
+            print(f"\nTotal Tokens: {chunk.interaction.usage.total_tokens}")
+
 
 # Conversation
 
@@ -255,7 +286,6 @@ def audio_multi_speaker_generation():
 
 # Agents
 
-
 def agent():
     """Demonstrate agent using the new Interactions API."""
     client = genai.Client()
@@ -278,13 +308,68 @@ def agent():
         print(f"Status: {interaction.status}")
 
         if interaction.status == "completed":
-            print("\nFinal Report:\n", interaction.outputs[-1].text)
+            print("\nModel Final Report:\n", interaction.outputs[-1].text)
             break
         if interaction.status in ["failed", "cancelled"]:
             print(f"Failed with status: {interaction.status}")
             break
 
         time.sleep(10)
+
+# Custom tool/functions are quite tedious in interactions API, 
+# I'll skip it for now but you can see examples in the docs:
+# https://ai.google.dev/gemini-api/docs/interactions?ua=chat#tools-and-function-calling
+
+
+# Built-in tools
+# Gemini comes with built-in tools like Grounding with Google Search, Code execution, URL context, and Computer Use
+# https://ai.google.dev/gemini-api/docs/interactions?ua=chat#built-in_tools
+
+def tool_google_search():
+    """Demonstrate grounding with Google Search using the new Interactions API."""
+    client = genai.Client()
+
+    prompt = "What is the weather like today in London?"
+    print(f"User: {prompt}")
+
+    interaction = client.interactions.create(
+        model=MODEL,
+        input=prompt,
+        tools=[{"type": "google_search"}]
+    )
+
+    # Find the text output (not the GoogleSearchResultContent)
+    text_output = next((o for o in interaction.outputs if o.type == "text"), None)
+    if text_output:
+        print(f"Model: {text_output.text}")
+
+
+def tool_mcp():
+    """Demonstrate MCP server using the new Interactions API."""
+    client = genai.Client()
+
+    mcp_server = {
+        "type": "mcp_server",
+        "name": "weather_service",
+        "url": "https://gemini-api-demos.uc.r.appspot.com/mcp"
+    }
+
+    today = datetime.date.today().strftime("%d %B %Y")
+
+    prompt = "What is the weather like today in London?"
+    print(f"User: {prompt}")
+
+    interaction = client.interactions.create(
+        model=MODEL,
+        input=prompt,
+        tools=[mcp_server],
+        system_instruction=f"Today is {today}."
+    )
+
+    # Find the text output (not the GoogleSearchResultContent)
+    text_output = next((o for o in interaction.outputs if o.type == "text"), None)
+    if text_output:
+        print(f"Model: {text_output.text}")
 
 if __name__ == '__main__':
     globals()[sys.argv[1]]()

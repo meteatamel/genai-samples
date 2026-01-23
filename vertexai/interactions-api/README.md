@@ -37,7 +37,76 @@ export GOOGLE_CLOUD_LOCATION=global # Required for preview models
 
 ## Run samples
 
-TODO
+Run the samples using `python main.py <sample-name>`.
+
+### Basic interactions
+
+```sh
+# Generate text using the old generate_content method
+python main.py basic_generate_content
+
+# Generate text using the new Interactions API
+python main.py basic_interaction
+
+# Generate text using the new Interactions API in a streaming fashion
+python main.py basic_interaction_stream
+```
+
+### Conversation
+
+```sh
+# Stateful chat using the new Interactions API
+python main.py chat_stateful
+
+# Stateless chat using the new Interactions API
+python main.py chat_stateless
+```
+
+### Multimodal understanding
+
+```sh
+# Image understanding
+python main.py image_understanding
+
+# Audio understanding
+python main.py audio_understanding
+
+# Video understanding
+python main.py video_understanding
+
+# PDF understanding
+python main.py pdf_understanding
+```
+
+### Multimodal generation
+
+```sh
+# Image generation
+python main.py image_generation
+
+# Audio generation
+python main.py audio_generation
+
+# Audio multi-speaker generation
+python main.py audio_multi_speaker_generation
+```
+
+### Agents
+
+```sh
+# Deep Research Agent
+python main.py agent
+```
+
+### Built-in tools
+
+```sh
+# Grounding with Google Search
+python main.py tool_google_search
+
+# MCP server
+python main.py tool_mcp
+```
 
 ## References
 
