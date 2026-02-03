@@ -1,5 +1,7 @@
 # Interactions API - Unified API for models and agents
 
+![Interactions API overview](hero_gemini_interactions_api.png)
+
 An example that shows how to use [Interactions API](https://ai.google.dev/gemini-api/docs/interactions), the new unified API for models and agents
 
 ## Before you start
